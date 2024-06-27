@@ -1,0 +1,645 @@
+/* CSS样式表:  外部样式表<link>    内部样式表<style>   内联样式表 <p style=""> 
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+特殊规则:  @rules        例如:   @import 'style2.css'  在当前CSS样式表中引入另一个样式表
+                                @media (min-width: 300px) { }    媒体查询  
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+CSS基础语法:  选择器{CSS属性名(properties):CSS属性值(value)}   CSS属性名和值区分大小写   多属性间要有空格分隔
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+选择器权重: 继承或* 0,0,0,0    元素(标签)选择器 0,0,0,1    类选择器,伪类选择器(:) 0,0,1,0    ID选择器 0,1,0,0   内联样式 1,0,0,0  !important ∞无穷 
+           通用选择器(*),组合符(+,>,~,||),和否定伪类(:not)不影响优先级
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+选择器  *所有元素    element元素选择器    .element类(class)选择器  #element(id)选择器
+        element,element并集选择器(并集选择器如果有一个元素名有问题,并集中所有选择器对象都会失效)
+        element element子集选择器        
+        element + element相邻选择器(选择元素1相邻的(兄弟关系)第一个元素)
+        element[title]标签选择器(指定元素,并且元素中含有指定属性)
+        :伪类选择器    ::伪元素选择器
+
+        ul > li直接子代选择器(只选中指定ul元素的所有li元素,li中再嵌套的元素不会被选中)
+        element ~ element兄弟选择器(p ~ span 匹配同一个父级下 p元素后面的所有span元素)
+        element || element 列组合选择器(col || td 匹配所有col元素内的td元素)
+        element + element紧邻兄弟选择器(p + span 匹配同一个父级下,p元素后的第一个span元素
+        element[attribute]属性选择器    [attr]匹配带有指定属性的元素     
+                                       [attr=value]匹配指定属性和值的元素   
+                                       [attr~=value1 value2]匹配带有指定属性,并且至少匹配其中一个值的元素  
+                                       [attr|=value]匹配带有指定属性,并且属性值等于value或以value开头
+                                       [attr^=value]匹配带有指定属性,并且属性值以value开头
+                                       [attr$=value]匹配带有指定属性,并且以value值结尾的元素
+                                       [attr*=value]匹配带有指定属性,并且属性值中包含value关键字的元素
+                                       [attr oprator(运算符) value i/I]  i或I代表不区分大小写  s或S代表区分大小写
+        element::pseudo-element-name伪元素选择器  常用伪元素(在文档中添加新的元素)选择器:    ::after元素后添加    ::before元素前添加  before和after必须有content属性
+                                    ::first-line选中元素中第一行
+        element:pseudo-class-name伪类选择器  常用伪类选择器:  :hover(鼠标经过)  :focus(获得焦点) :invalid(未通过验证) :only-child(子元素且没有兄弟元素)  
+                                                            :nth-child(an+b)....
+---------------------------------------------------------------------------------------------------------------------------------------------------
+CSS通用属性值:  inherit 继承父元素当前相同属的性值   initial 设置属性值和默认样式相同,浏览器默认样式没有当前属性值将被设置为inherit
+               unset 将属性重置为自然值,如果是自然继承就是inherit,否则和initial相同       revert 支持少,不常用
+               可以使用shorthand(速记)属性  all : unset;  将当前元素的所有属性撤销
+---------------------------------------------------------------------------------------------------------------------------------------------------
+ CSS值和单位
+    绝对长度单位: cm厘米 mm毫米 Q四分之一毫米 in英寸 pc十二点活字 pt点 px像素
+    相对长度单位: em在font-size中使用相对于父元素的字体大小,其他属性使用自身字体大小
+                 ex字符"x"的高度   ch字符"0"的宽度  rem根元素的字体大小  lh元素的line-height大小
+                 vw视窗宽度的1%    vh视窗高度的1%   vmin视窗较小尺寸的1%   vmax视窗较大尺寸的1%
+                 fr自适应flex单位
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+元素尺寸  原始尺寸:不指定width height 元素默认的尺寸  <img>为图片本身像素大小  <div>没有高度,宽度为屏幕宽度
+          固定尺寸(外部尺寸):手动指定元素的固定尺寸  百分比尺寸(相当于父级元素的百分比)   margin和padding的百分比尺寸是按照元素的内联尺寸计算的,所以不单独指定百分比情况下四个方向是相同的值
+          min-和max-尺寸: 指定元素的最大宽高或最小宽高
+--------------------------------------------------------------------------------------------------------------------------------------------------- 
+*/
+
+
+/* var()变量样式,变量样式文件只要被引用,其中设置的样式其他文件也可以调用-------------------------------------------------------------------------------------------- */
+
+:root {
+    --valueName: rgba(50, 50, 50, 0.5);
+    /*创建变量以 --开头*/
+    background: var(--valueName);
+    /*使用方法*/
+    content: attr(data-);
+    /* 使用attr可以获取元素的属性 HTML5 元素属性以data-开头 */
+}
+
+
+/* text文本样式-------------------------------------------------------------------------------------------- */
+
+.text {
+    /* text文本相关 */
+    text-align: center;
+    /* 文字对齐方式: left right center justify(改变字符间距,所有行等宽)*/
+    text-transform: none;
+    /* 转换字体  none禁止转型  uppercase将所有文本转换为大写  lowercase将所有文本转换为小写 capitalize所有单词首字母大写 full-width所有文字转换为全角(全角即固定宽度的正方形,类似等宽字体) */
+    text-decoration: none;
+    /* 设置取消字体上的装饰(可接收多个值) none取消文本已存在的装饰  underline下划线  overline上划线  line-through删除线 */
+    text-decoration: overline underline red wavy;
+    /* text-decoration由text-decoration-line(装饰线位置),text-decoration-color(装饰线颜色),text-decoration-style(装饰线样式)三个属性组成,可以连写 */
+    text-underline-position: auto;
+    /* 指定下划线排版的位置  需配合text-decoration: underline;*/
+    text-shadow: 4px 4px 5px red;
+    text-shadow: 1px 1px 2px #547852, 0px 9px 5px rgb(40, 80, 90), 6px 1px 3px rgba(200, 60, 156, 0.2);
+    /* 文字阴影 text-shadow: x轴偏移 y轴偏移 模糊半径 阴影颜色  可以应用多个阴影效果,逗号分隔*/
+    line-height: 1.5;
+    /* 行高: 单行文字垂直居中需要行高等于盒子高度,可使用倍数,具体单位... */
+    letter-spacing: normal;
+    /* letter-spacing设定字符间距 */
+    word-spacing: normal;
+    /* word-spacing 单词间的间距 */
+    text-rendering: auto;
+    /* 尝试执行文本渲染优化 */
+    text-indent: 2em;
+    /* 首行缩进 */
+    text-overflow: ellipsis;
+    /* 文本溢出显示的方法, clip默认值,在文本极限区域截断文本(文字可能只显示一半)  ellipsis以省略号...显示截断的文本   "[..]"以指定符号显示截断的文本(实验) */
+    white-space: normal;
+    /* 设置如何处理元素内部的空白和换行 */
+    -webkit-line-clamp: 2;
+    /*配合white-space 两行显示文本*/
+    word-wrap: normal;
+    /* 设置单词能否在内部换行(单词中间换行) */
+    hyphens: none;
+    /* 开启关闭单词换行连接符: none 只有空格才能换行  manual auto 换行拆分单词时会有连接线   属性支持一般 */
+    line-break: auto;
+    /* 对东亚语言采用更强或更弱的换行规则 */
+    text-align-last: auto;
+    /* 定义一个块或行的最后一行,恰好位于强制换行前时,如何对齐 */
+    text-orientation: mixed;
+    /* 定义行内文本的方向 mixed默认值,水平书写的自然布局  upright垂直书写的文字 sideways水平书写样式但是顺时针旋转90度...*/
+}
+
+.writing-mode {
+    /* 书写模式:文字阅读方向 */
+    writing-mode: vertical-rl;
+    /* 参数: horizontal-tb 对于左对齐文本(ltr)横向显示文本从左至右水平流动,下一行在下方,右对齐文本(rtr)横向显示文本从右向左流动,下一行在下方  
+            vertical-rl 对于左对齐文本(ltr)上下垂直流动,下一行在左侧
+            vertical-lr 对于左对齐文本(ltr)上下垂直流动,下一行在右侧        
+            其他参数为实验或删除参数
+            sideways-rl 垂直流动,所有文本都在右侧生成
+            sideways-lr 垂直流动,所有文本都在左侧生成
+    */
+    /* 改变书写模式,内联inline的方向也会改变 */
+    inline-size: auto;
+    /* inline-size(内联维度尺寸)属性会根据writing-mode的方向影响盒子宽度,默认width ,vertical模式下会影响height */
+    /* block-size(块级维度尺寸)同上 */
+    /* writing-mode也会有margin padding border对应的属性映射  margin-top 映射 margin-block-start 
+                                                            padding-left 映射 padding-inline-start
+                                                            border-bottom 映射 border-block-end
+    */
+    /* 参考:CSS逻辑属性与值 ,使用逻辑属性可以保证在任何书写模式下边距的位置都是正确的*/
+}
+
+
+/* font文字样式-------------------------------------------------------------------------------------------- */
+
+.font {
+    /* font文字相关 */
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    font-family: serif, sans-serif, monospace, "cursive", "fantasy";
+    /* 文字字体 arial(泛型:sans-serif)字体在任何电脑重都可以找到  */
+    /* CSS定义了5个常用字体 serif(有衬线字体) sans-serif(无衬线) monospace(等宽) cursive(模拟笔迹) fantasy(装饰用字体) */
+    /* 字体栈:为font-family提供多个值,用逗号分隔,浏览器会按循序匹配所支持的字体 多单词组成的字体名需要用引号''包裹 */
+    font-size: 16px;
+    /* 字体大小 字体大小可以使用px像素,em父元素字体大小 rem根元素(html)字体大小*/
+    font-style: normal;
+    /* 字体样式 normal默认  italic斜体(当前字体斜体可用将启用斜体版本,不可用启用oblique模拟斜体)  oblique字体模拟斜体 */
+    font-weight: 100;
+    /* 字体粗细: lighter细 normal普通 bold加粗 或数值控制(无符号)*/
+    font-kerning: auto;
+    /* 开启关闭字体间距 */
+    font-variant: normal;
+    /* 由多个属性组成,调整字体的属性,具体查阅手册  */
+    font-size-adjust: none;
+    /* 独立于字体实际大小尺寸,调整其可视大小 */
+    font-stretch: normal;
+    /* 属性为字体定义一个正常或伸缩变形的字体外观,查阅手册 */
+    font: italic normal 500 normal 16px 1.5 Arial, sans-serif;
+    /* font简写模式按照 font: font-style font-variant font-weight font-stretch font-size line-height font-family循序书写,只有font-size和font-family是必须指定的 */
+}
+
+@font-face {
+    /* 指定要下载的字体文件 */
+    font-family: "myFont";
+    src: url("myFont.ttf");
+    font-weight: normal;
+    font-style: normal;
+    /* 声明@font-face后,就可以在font-family中使用自定义字体了 */
+}
+
+
+/* cale简单运算-------------------------------------------------------------------------------------------- */
+
+.loading {
+    width: calc(90%-30px);
+    /* calc()函数可以进行简单的计算CSS3 */
+}
+
+
+/* transform-------------------------------------------------------------------------------------------- */
+
+.animation {
+    transform: translate();
+    /* transform函数允许对元素进行旋转(rotate),缩放(scale),倾斜(matrix),平移(translate) */
+}
+
+
+/* 盒子样式-------------------------------------------------------------------------------------------- */
+
+.box {
+    /* 盒模型 */
+    display: inline-block;
+    /*block块级盒子,width/height可用,每个盒子占一行,可以使用margin padding border属性*/
+    display: inline;
+    /*inline内联盒子,不会换行,width/height不可用,垂直方向margin padding border会应用但是不会推开其他inline盒子,水平方向会推开其他inline盒子*/
+    display: inline-block;
+    /*inline-block内联块级盒子 盒子的width,height和margin,padding,border属性会推开其他元素,但是不会换行*/
+    box-sizing: border-box;
+    /* 替代(IE)盒模型border-box  盒子向内挤压,width,height设定的是盒子除了margin属性外的最终大小 */
+    vertical-align: middle;
+    /*设置元素的垂直对齐方式,只对行内和行内块元素有效*/
+}
+
+.margin {
+    margin: all;
+    margin: height width;
+    margin: top right bottom left;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    /* margin可以给负值, */
+    /* margin外边距折叠,当相邻的两个盒子模型都有margin属性并且重叠时,他们间的距离不是总和,而是他们当中最大的margin值 */
+}
+
+.padding {
+    padding: all;
+    /* margin和padding百分比是相对于父盒子的宽度计算的 */
+    /* 同margin */
+}
+
+.border {
+    border: 1px solid #000000;
+    /* border: 边框宽度  边框样式:solid 边框颜色 */
+    border-top: 1xp solid #000000;
+    border-right: 1xp solid #000000;
+    border-bottom: 1xp solid #000000;
+    border-left: 1xp solid #000000;
+    /* 单独设置边框 */
+    border-width: 1px;
+    /* 单独设置边框大小 */
+    border-style: solid;
+    /* 单独设置边框样式 none(无) hidden(隐藏) dotted(点) inset(凹陷阴影) outset(突出阴影) dashed (虚线) double(双实线) groove(雕刻效果) ridge(浮雕)*/
+    border-color: #000000;
+    /* 单独设置边框颜色 */
+    border-top-color: #000000;
+    /* 单独设置一条边的属性,其他类似 */
+}
+
+.border-radius {
+    border-radius: 10px;
+    border-radius: 10px / 20px;
+    border-radius: lefttop righttop rightbottom leftbottom;
+    border-top-left-radius: 10px;
+    /* 设置盒子圆角 */
+    border-radius: 4px 3px 6px / 2px 4px;
+    /* 等同于 */
+    border-top-left-radius: 4px 2px;
+    border-top-right-radius: 3px 4px;
+    border-bottom-right-radius: 6px 2px;
+    border-bottom-left-radius: 3px 4px;
+}
+
+.outline {
+    /* outline和border很相似,但是outline不占盒子空间,在背景显示  outline圆角仍需要通过border-radius设置*/
+    outline: red solid 3px;
+    /* 颜色 样式 宽度 */
+    outline-color: red;
+    outline-style: double;
+    outline-width: 3px;
+}
+
+.bcakground {
+    background: linear-gradient( 45deg, rgba(255, 255, 255, 0.2) 10% 30%, rgba(51, 56, 57, 1) 96%) center center / 400px 200px no-repeat, url(图片.jpg) center no-repeat, red;
+    /* background: 渐变(角度, 颜色1 颜色1结束位置 渐变中心,颜色2 颜色2开始位置) y轴位置 x轴位置/width height 平铺方式 , 另一张图片 居中对齐 不平铺 , 背景底色   */
+    /* background语法: background: bg-color bg-image position/bg-size bg-repeat bg-origin  bg-clip    bg-attachment initial|inherit */
+    /*                 background: 背景色   背景图片  背景定位/图像大小  平铺方式  相对定位  背景绘画区域   背景是否固定    继承背景图片  */
+    /* attachment,bg-image,position,bg-size,repeat-style只能出现一次  bg-size只能紧挨position出现 以"/"分隔   
+       background-origin和background-clip 出现一个值同时设置  出现两个值 先设置origin在设置clip   background-color只能出现在最后*/
+    background-image: url(图片.png), url(图片2.png);
+    /* 设定背景图片 可以指定多个背景图片,逗号分隔 */
+    background-repeat: no-repeat;
+    /* 设定背景平铺方式 no-repeat 不重复  repeat-x 水平重复  repeat-y 垂直重复  repeat 在垂直水平两个方向重复 */
+    background-size: cover;
+    /* 调整背景图像大小  cover填充(保持宽高比,填充满元素,会溢出隐藏) contain拉抻(保持宽高比,显示全部图像)  百分比50%  像素50px ...*/
+    background-position: top center;
+    background-position: 20px 10%;
+    background-position: top 20px right 10px;
+    background-position-x: center;
+    background-position-y: top;
+    /* 背景图像定位 默认左上角(0,0)对齐  可使用关键字 百分比 像素值*/
+    background-attachment: scroll;
+    /* 背景附加  scroll 元素滚动背景不变,页面滚动背景滚动   flxed 背景固定   local将背景固定在元素上,元素滚动,背景也滚动 */
+}
+
+.overflow {
+    overflow: visible;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    /* overflow属性用于控制盒子内部的溢出 默认属性visible */
+    /* overflow属性: hidden 隐藏溢出   scroll 添加滚动条显示溢出  overflow-x,overflow-y控制滚动条滚动方向 默认y轴滚动*/
+    overflow: scroll hidden;
+    /* 同时设定xy轴滚动条 overflow: x轴 y轴 */
+    overflow: auto;
+    /* 自动判断何时出现什么样的滚动条 */
+    overflow-wrap: normal;
+    /* overflow-wrap属性用于控制盒子溢出情况下,文字如何断行   normal空格断行  break-word在单词中间也可以断行 anywhere*/
+    word-break: normal;
+    /* 使用word-break属性也可以控制文字换行  normal默认规则  break-all 对于不是CJK(中文/日文/韩文)的文本,可以在任意字符换行
+                                           keep-all CJK文本不断行,非CJK文本同normal */
+}
+
+.object-fit {
+    /* 指定可替换元素(可替换元素值类似于<img>,<video>,<iframe>这样)的内容如何匹配盒子大小 */
+    object-fit: contain;
+    /* 属性值: contain可替换内容将被缩放,填充满盒子同时保持宽高比,宽高比不匹配部分将填充黑边
+               cover可替换内容保持宽高比填充满盒子,宽高比不匹配的部分将被裁切
+               fill可替换内容宽高拉抻至盒子大小,不在保持原宽高比
+               none可替换内容保持原有尺寸
+               scale-down内容的尺寸与none或contain中的一个相同,取决于他们两个之间谁得到的对象尺寸更小 */
+    object-position: top;
+    /*object-fit裁剪图片的对齐位置*/
+}
+
+.form {
+    font-family: inherit;
+    /* 有些浏览器表单中不会继承字体样式,因此需要在form元素中指定继承父元素的字体 */
+}
+
+
+/* table表格样式-------------------------------------------------------------------------------------------- */
+
+.table {
+    border-collapse: collapse;
+    /* border-collapse属性用于决定表格边框是独立的还是合并的  collapse合并边框  separate独立边框*/
+    table-layout: fixed;
+    /* table-layout定义了布局表格单元格,行和列的算法  auto采用自动表格布局,表格宽度取决于包含内容    
+                                                   fixed表格和列的宽度通过表格宽度设定,单列的宽度通过首行单元格决定 */
+    caption-side: top;
+    /* 设定表格描述位置 */
+}
+
+
+/* 列表样式-------------------------------------------------------------------------------------------- */
+
+.ulol {
+    list-style-type: none;
+    /* 无序列表和有序列表的标记样式 none无  disc实心圆点(默认值) circle(空心圆点) square(实心方块)
+                                decimal(十进制阿拉伯数字,从1开始)  cjk-decimal(中日韩十进制,一二三) decimal-leading-zero(0开头的阿拉伯数字 , 01 02 03)
+                                lower-roman(小写罗马数字, i ii iii)  upper-roman(大写罗马数字,I II III)  lower-greek(希腊字母)
+                                lower-latin(小写字母) upper-latin(大写字母)  等等....还有好多种 */
+    list-style-position: inside;
+    /* 项目符号出现位置:  outside标记盒在主盒子外   inside标记盒在盒子中,标记是每行第一个盒子 */
+    list-style-image: url(图片.jpg);
+    /* 使用图片作为项目符号,更推荐使用background设置图片项目符号,可调节参数更多, list-style-type:none; padding-left:2rem; background:url() 0 0/1.6rem 1.6rem no-repeat; */
+    list-style: square inside url();
+    /* 可以用速记属性赋值,顺序不固定 */
+}
+
+
+/* 链接样式-------------------------------------------------------------------------------------------- */
+
+a {
+    text-decoration: underline;
+    /* a链接的样式表应该遵从 a a:link a:visited a:focus a:hover a:active顺序声明,可以防止因为先后顺序导致CSS样式无法生效 */
+}
+
+a:link {
+    color: blue;
+    /* 没有访问过的连接,上默认属性 */
+}
+
+a:visited {
+    color: purple;
+    /* 访问过的连接,上默认属性 */
+}
+
+.a:focus {
+    border: 1px solid black;
+    /* 连接被选中,例如使用Tab键切换到当前链接,上默认属性 */
+}
+
+a:hover {
+    cursor: pointer;
+    /* 鼠标经过,上默认属性 */
+}
+
+a:active {
+    color: red;
+    /* 激活时,例如链接被点击时,上默认属性 */
+}
+
+
+/* 布局-------------------------------------------------------------------------------------------- */
+
+
+/* 默认情况下 块盒子block宽度为页面100%,高度为内容高度, 内联元素inline宽度和高度是内容大小,不能单独设置 */
+
+.flex {
+    display: flex;
+    /* flex模型说明: 主轴(main axis) 是flex放置方向的轴,默认x轴,她的开始和结束称为main start和main end
+                    交叉轴(cross axis) 是垂直于主轴的轴,如果主轴为x轴,交叉轴就是y轴,改轴的开始和结束称为cross start和cross end
+                    设置了display:flex的元素称为flex容器(flex container)
+                    在flex容器中的元素称为  flex项(flex item) */
+    flex-direction: column;
+    /* flex-direction属性用于设置主轴的方向, row行(默认)  colum列  row-reverse反向行  colum-reverse反向列 */
+    flex-wrap: wrap;
+    /* flex-wrap设置了flex项的换行方法 nowrap元素不换行,一直沿着主轴放置  wrap页面空间不足时切换到下一行  wrap-reverse同wrap,但是交叉轴start和end互换 */
+    flex-flow: column wrap;
+    /* flex-flow是flex-direction和flex-warp的缩写形式 */
+    flex: 200px;
+    flex: 1;
+    /*  flex:200px;表示flex项最小宽度为200px ,
+        flex也可以表示flex项的动态尺寸,所有flex项的flex值相同,表示所有flex项平均分配当前flex容器空间
+        如果有三个flex项,她们的flex值分别为1,1,2那么第三个flex项所占空间为1/2,其他两个flex项占1/4*/
+    flex-grow: 1;
+    /*grow 成长*/
+    flex-shrink: 1;
+    /*shrink收缩*/
+    flex-basis: 20px;
+    /*basis基础*/
+    /* flex实际上是flex-grow,flex-shrink,flex-basis的缩写
+            flex-grow是一个无单位值,表示flex项所占比例
+            flex-shrink指定了flex项的收缩规则,flex元素在默认宽度之和大于容器的时候才会收缩,其收缩大小的依据是flex-shrink的值 0代表不允许收缩
+            flex-basis指定了flex元素在主轴方向上的初始大小,如果不用box-sizing改变盒模型规则,那麽这个属性就决定了flex元素的内容盒(content-box)的尺寸
+            flex-basis值:   指定宽度  auto自动或带单位尺寸
+                            固有尺寸关键词  fill充满   max-content最大内容宽度  min-content内容能拆分的最小宽度 fit-content适应内容
+                          1  content在flex item内容上的自动尺寸
+                            全局数值 inherit  initial  unset */
+    align-items: center;
+    /* align-items控制flex项在交叉轴上的位置: stretch   normal  
+                                            center   start   end   flex-start   flex-end   self-start   self-end
+                                            baseline    first bastline   last baseline    safe center   unset center
+                                            inherit   initial   unset */
+    /* 可以使用align-self 覆盖align-items的属性 */
+    justify-content: center;
+    /* justify-content控制flex项在主轴上的位置:   start从行首开始排列,每行第一个元素与首行对齐,同时后续元素与前一个对齐
+                                                flex-start行首开始排列,每行第一个弹性元素与首行对齐,同时后续弹性元素与前一个对齐
+                                                flex-end从行尾开始排列,每行最后一个弹性元素与行尾对齐,其他元素将与后一个对齐
+                                                center伸缩元素居中排列,每行第一个元素到行首的距离将与每行最后一个元素到行尾的距离相等
+                                                left元素从容左边排列,如属性主轴与内联轴不平行,则和start结果相同
+                                                right元素从容器右边排列,如属性轴与内联轴不平行,则和end结果相同
+                                                baseline   first baseline  last baseline 指定基线对齐
+                                                space-between每行均匀分配弹性元素,弹性元素间距相同,行首行尾元素对齐(左右不留空间)
+                                                space-around每行均匀分配弹性元素,弹性元素之间距离相同,行首行尾保留一半间距(留空间)
+                                                space-evenly每行均匀分配弹性元素,行首,行尾,元素间的距离相同
+                                                stretch
+                                                safe与对齐关键字(align-items属性)一起使用,如果关键字导致元素溢出,将使用start属性代替safe
+                                                unsafe与对齐关键字一起使用,溢出也会执行当前效果 */
+    order: 1;
+    /* order属性可以更改flex元素的排列位置,默认所有flex元素order值为0,order值越大,越往后排,值相同根据页面顺序排列,可以使用负值 */
+    /* display:flex;属性只能影响一层元素,使用flex嵌套可以完成更多种样式 */
+}
+
+.grid {
+    /* grid网格,直接子项会变成网格 */
+    display: grid;
+    gap: 20px;
+    /*grid-gap已过时,现在使用gap属性*/
+    /* gap设置行和列的间隙值,等同于 column-gap和row-gap  间隙值不能使用fr单位 grid-gap过时是为了让gap属性可以应用于更多布局方法*/
+    column-gap: 20px;
+    /*grid-column-gap已过时,现在使用column-gap*/
+    row-gap: 20px;
+    /*grid-row-gap已过时,现在使用row-gap*/
+    grid-template-columns: 200px 200px 200px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr 3fr);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* 
+    声明grid网格中有几列 可以指定固定尺寸,可以使用百分比或fr单位,repeat表示重复repeat(重复次数,重复内容(可多个值),auto-fill值可以自行判断重复次数
+    minmax(最小宽度,最大宽度)
+    */
+    grid-template-rows: auto;
+    /* 同上 *-templat-* 是显式网格 */
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+    /* *-auto-* 是隐式网格,隐式网格是指没有设定显式网格的情况下,自动生成的网格和网格大小的规则 */
+    grid-auto-rows: minmax(100px, auto);
+    /* minmax()函数 配合网格使用,根据条件设定网格大小, minmax(最小尺寸(如果网格内容均小于最小尺寸,网格无变化),超过最小尺寸应用的样式)*/
+    grid-column-start: auto;
+    grid-column-end: 2;
+    grid-row-start: -1;
+    grid-row-end: span 3;
+    /* 设定第一个元素从哪里开始,最后一个元素如何结束 auto自动  正整数从第几列开始 负整数倒数第几列开始  
+        span第一个或最后一个元素占几列,可以使用grid-colum和grid-row属性代替 */
+    grid-column: 2 / -1;
+    grid-row: 2 / span 2;
+    /* 给出两个grid-line值用/斜线将start和end的值分隔开 , 隐式网格不能使用负值定位最后一个元素,colum和row指的是列的边线,5列的网格有6条边线*/
+    grid-template-areas: "a a ." "b c c" "b c c";
+    grid-area: a;
+    /* grid-template-areas每个引号""中的内容代表一列,元素占多少位置,出现几次,无元素用.占位, 元素在css中使用grid-area属性设定元grid中的元素名
+    grid-area元素必须连续出现,必须是矩形结构*/
+}
+
+.float {
+    /* 浮动由于flex的出现,float已经不在作为网页布局的主要手段了 */
+    float: left;
+    /* 元素在父盒子中浮动,元素下方的元素会占据浮动元素原本行未使用部分(文字环绕) */
+    clear: both;
+    /* 清除浮动,所有在浮动元素后面,不浮动的内容都将围绕浮动元素,为了解决这个问题,需要使用clear清除浮动属性,表示浮动在当前元素结束,不在影响后续元素 */
+}
+
+.clearfix {
+    /* 使用一个看不见的div盒子来清除上下浮动,在不想浮动的元素前加一个看不见的div盒子是清除浮动的优选方法 */
+    clear: both;
+}
+
+.position {
+    /* 定位:定位允许你从正常文档流布局中取出元素,使其具有不同的行为 */
+    /* 首先元素必须是块级元素block */
+    position: static;
+    /* static是position的默认值,表示静态定位,意味着元素无特别之处,放在正常的流布局中使用 */
+    position: relative;
+    top: 30px;
+    left: 50%;
+    /* relative相对定位,元素保留原本占用的空间,并通过top,bottom,left,right属性调整元素相对于原位子的移动 */
+    position: absolute;
+    /* absolute绝对定位,绝对定位元素不再占有原来的空间,元素将浮动在其他元素之上(类似新建图层),绝对定位的top,bottom,left,right与父级元素对齐
+    如果绝对定位的父级没有设置position属性,那么所有父级position属性都是static,绝对定位将被包含在初始块容器中,也就是浏览器视口
+    所以绝对定位盒子的父级盒子必须添加relative属性,子绝父相 */
+    z-index: 1;
+    /* z-index用于设定元素重叠情况下,元素的先后位置,图层顺序,控制Z轴的位置,数字大的堆栈到上方,默认情况下所有元素z-index:0; */
+    position: fixed;
+    /* fixed固定定位,与绝对定位使用方法相同,不同的是固定定位将元素固定在视口固定位置,无论如何移动视口,固定定位元素都不会移动 */
+    position: sticky;
+    /* sticky粘性定位,是相对定位可固定定位的混合,通过top,bottom,left,right设定元素的阈值,在未达到阈值前,元素呈现相对定位样式,当元素滚动到指定位置,呈现固定定位样式
+    元素在未设定z-index或设定相同z-index值情况下,后面的元素会遮盖前面的元素,可使用sticky实现有趣效果 */
+}
+
+.multicol {
+    column-count: 3;
+    /* column-count属性指定将容器分成几列 */
+    column-width: 200px;
+    /* column-width属性指定每列的最小宽度,除非列宽度和容器宽度能整除,否则剩余空间将平均分配给创建的列 */
+    column-gap: normal;
+    /* column-gap属性用于更改列间隙,同grid网格 */
+    column-rule: 2px dotted rgb(40, 80, 90);
+    column-rule-width: 2xp;
+    column-rule-style: double;
+    column-rule-color: #547852;
+    /* 在列与列之间加入分割线,分割线不占用盒子宽度,类似outline,通过column-gap增加空间 */
+    break-inside: avoid;
+    page-break-inside: avoid;
+    /*旧属性*/
+    /* break-inside用于控制多列布局下,盒子如何中断换行,默认盒子可能在中间截断放入下一列
+            break-after(前一个元素) break-inside(当前元素) break-before(后一个元素) 元素可能断点的位置设置
+            auto在主框中插入任何断点  avoid主框中不允许断点  avoid-pape避免主框中任何页面的断点  avoid-column避免主框列中的断点  avoid-region避免原则框中的断点 */
+}
+
+.svg {
+    fill: #000000;
+    /*设定svg的颜色*/
+}
+
+
+/* @media 媒体查询,是目前响应式布局的基础 */
+
+
+/* 媒体查询语法 @media media-type(媒体类型) and (media-feature-rule(媒体表达式)) and (media-feature-rule) { 选择器{属性:属性值;} }
+    多个媒体查询表达式通过and关键字连接
+    @media media-type and (media-feature-rule) , media-type and (media-feature-rule) { 选择器{属性:属性值;} }
+    媒体查询中的 或 使用逗号分隔两个媒体查询,实现同一个样式效果
+    @media not media-type and (media-feature-rule) { 选择器{属性:属性值;} }
+    媒体查询中的 非 使用not关键字,表示相反结果时,媒体查询生效
+    媒体类型可指定为:all(所有不设置媒体类型的默认值)  print(打印)  screen(屏幕)  speech(语音)
+    逻辑操作符 and(与) not(非) only(仅,媒体类型必须指定媒体表达式) ,(逗号,多个媒体查询合并为一个规则) or(等价于 , 逗号)
+    媒体特性 (hover:hover)鼠标悬停  (max-width: 2000px)媒体最大2000像素宽  (min-width: 100px)媒体最小100像素宽时
+*/
+
+@media screen and (min-width: 800px) and (max-width: 2000px) {
+    /* 媒体表达式可以使用 width  min-width max-width等特征 
+                        orientation(测试媒体竖放或横放模式): landscape(横放)/portrait(竖放) 根据屏幕横纵比判断 
+                        媒体表达式还可以使用伪类选择器 hover: hover   用于判断用户是否使用指点设备(鼠标),触摸和键盘无法实现悬浮
+                        其他广泛支持的媒体类型 grid,height,aspect-ratio,color,
+                        仅IE不支持的媒体类型   any-hover,any-pointer,calc(),display-mode,hover,monochrome,pointer,prefers-cplor-scheme等
+                        pointer可以判断用户交互方式,可以在用户使用触摸设备时,通过媒体查询增加交互范围*/
+    .element {
+        background: #16bb57;
+    }
+}
+
+.les {
+    margin-top: 50px;
+}
+
+
+/*
+CSS动画 
+创建动画 
+@keyframes animation-name {
+    0%(from) {
+        属性: 值;
+        }
+    100%(to) {
+        属性: 值;
+        }
+}
+使用动画
+选择器 {
+    animation-name:动画名称; (必须)   
+    animation-duration: 1s 动画持续时间; (必须)
+}
+*/
+
+
+/*
+目前JS中的getAnimation方法 在2020年第三季度后更新的浏览器内核才支持,故扔推荐单独使用css动画或js动画
+js动画缺点 操作DOM元素,浏览器性能消耗大,容易丢帧,白屏, js动画只运行在主线程上,会造成线程阻塞,动画效果需要大量逻辑和判断,复杂程度高
+transform动画 可以通过 transition控制过度
+*/
+
+@keyframes animation {
+    0% {
+        width: 50px;
+        transform: none;
+    }
+    100% {
+        width: 200px;
+    }
+}
+
+.element {
+    animation-name: animation;
+    /*执行动画的名称*/
+    animation-duration: 5s;
+    /*动画播放一次总耗时*/
+    animation-timing-function: ease;
+    /*动画速度曲线 <easing-function> ease(逐渐变慢) linear(匀速) ease-in(加速) ease-out(减速) ease-in-out(先加速后减速) cubic-bezier(定义时间曲线)*/
+    animation-delay: 0s;
+    /*延迟*/
+    animation-iteration-count: 1;
+    /*播放次数 infinite(无限)*/
+    animation-direction: normal;
+    /*下一个周期逆向播放 默认normal只顺序播放  alternate逆向播放*/
+    animation-play-state: running;
+    /*动画是否在运行状态 running运行 paused暂停*/
+    animation-fill-mode: backwards;
+    /*动画完成后的状态 backwards返回原点 forwards保持最后状态*/
+    animation: 动画名 持续时间 运动曲线 延迟时间 播放次数 是否反向播放 动画结束状态;
+    /*简写*/
+}
+
+.element:hover {
+    /*鼠标经过,动画暂停*/
+    animation-play-state: paused;
+}
+
+.element:hover {
+    /* transition: 属性 运行时间 曲线 延迟 , 属性2 运行时间...;   逗号运行多个属性*/
+    transition: width 1s ease 0.5s;
+    /*
+     transition 状态是可以被js捕获到的 
+     transitionrun 捕获delay开始的时间点 也就是从transition触发开始触发
+     transitionstart 捕获delay结束时的时间点 也就是transition动画开始播放时触发
+     transitionend 捕获动画结束的时候触发
+     transitioncancel 在transition动画取消时触发,触发条件有  transition-property值被更改  display值被设定为none   动画运行完毕前就停止了,例如:hover条件下,鼠标移出了元素
+    */
+}

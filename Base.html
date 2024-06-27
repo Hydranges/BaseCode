@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<!-- 声明文档类型 -->
+<html lang="zh-CN">
+<!-- 声明文档语言,有助于搜索引擎有效索引,有助于残障阅读器分辨页面发音 可以在body中为元素单独添加 lang="指定语言" 属性 -->
+
+<head>
+    <!-- <meta name="" content="">元数据,指不能由其他标签(<base>,<link>,<script>,<style>或<title>)表示的Metadata信息 -->
+    <meta charset="UTF-8">
+    <!-- 设置页面文字编码 -->
+    <meta name="author" content="作者">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 兼容性模式,告诉IE8以上的IE浏览器,使用最高版本引擎渲染页面 -->
+    <!-- http-equiv相当于http的文件头,帮助浏览器正确显示网页内容,语法:<meta http-equiv="参数" content="参数变量" > 
+                http-equiv主要参数有:  Expires(期限)设定网页到期时间,一旦过期必须重服务器上重新传输,参数变量必须使用GMT格式  "Wed,20 jun 2007 20:00:05 GMT"
+                                      Pragama(cache模式)用于禁止浏览器在本地缓存中调阅页面内容,设定一旦离开网页就无法从Cache中再调出  参数变量"no-cache"
+                                      Refresh(刷新)自动刷新并指向新页面  参数变量"2 ; URL=http://www.www.com/"  停留2秒,并跳转到新网址
+                                      Window-target(窗口显示设定)强制页面在当前窗口以独立页面显示    参数变量  "_top"
+                                      content-Type(显示字符集设定)设定页面使用的字符集   参数变量 "text/html; charset=gb2312"
+                                      等等...
+                                      -->
+    <!-- <meta name="Page-Enter" content="blendTrans(Duration=3)"> -->
+    <!-- <meta name="Page-Enter" content="revealtrans(Duration=5,Transition=8)"> -->
+    <!-- Page-Enter Page-Exit Site-Enter Site-Exit 用于设定网页进入和退出特效 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
+    <!-- content="width=device-width" 属性会强制让手机浏览器采用他们真实的可视窗口宽度来加载网页 -->
+    <title>Document</title>
+    <!-- <title>页面标题</title> -->
+    <meta name="keywords" content="页面关键词">
+    <meta name="description" content="页面描述">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- 自定义icon图标 -->
+    <!-- <link rel="样式表" href="文件地址">   <link>标签:外部资源链接严肃 -->
+    <style>
+        /* 内部样式 */
+    </style>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+    <!-- CSS样式表 type:默认属性 text/css  media:规定适用于哪个媒体(媒体查询相关)   nonce:一种一次性加密随机数    title:指定可选的样式表   使用<link>标签时用到-->
+</head>
+
+<body>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- 网页基本组成 -->
+    <base href="指定文档中所有相对路径的根URL" target="_blank">
+    <!-- <base href="document.location.href" target="_self">  -->
+    <!-- <base target="_block">  -->
+    <!-- <base>标签一个页面只能有一个,如果有多个也只会使用第一个 不常用 -->
+    <header>页眉</header>
+    <!-- 页眉:横跨整个页面顶部有一个大标题或logo,网站的主要一般信息,每个页面都有,在<body>中表示整个页面的全局页眉,如果放在<article>中表示这部分特有的页眉 -->
+    <nav>导航栏</nav>
+    <!-- 导航栏nav,页面主导航功能,其中不应该包含二级链接等内容(二级链接就是打开当前链接后才能看到的链接) -->
+    <main>主内容</main>
+    <!-- 主内容 每个页面只能使用一次<main> -->
+    <article>本章内容</article>
+    <!-- 文章:表示文档,页面,应用或网站中的独立结构(包围的内容是一篇文章,与页面其他部分无关),其意是表示独立分配的或可复用的结构,如论坛帖子,杂志或新闻文章,博客,用户评论,交互组件或其他独立项目 -->
+    <!-- <article>代表一个完整的文章 -->
+    <section>
+        <h2>标题</h2>
+        <p>内容</p>
+    </section>
+    <!-- <section>标签类似<article>但更适用于组织页面(目录,迷你地图,文章标题和摘要),适用于以标题为开头,再填充内容,可以将<section>分成若干部分,放置于不同的<article>中 -->
+    <!-- <section>代表一个专题性内容,文章章节,可应用于搜索结果展示 -->
+    <aside>侧边栏(通常嵌套在&lt;main&gt;中)</aside>
+    <!-- 侧边栏:外围信息,链接,引用,广告,导航等,主要表示和页面主内容无关的内容 -->
+    <footer>页脚</footer>
+    <!-- 页脚:和标题相同,放置公共信息,小字体,次要内容,可以通过快速访问链接来进行SEO -->
+    <address>标记联系方式</address>
+    <!-- <address>标签用于标记联系方式,仅仅用于标记HTML页面作者的联系方式 -->
+
+    <!-- 自理解排版 -->
+    <base target="_blank">
+    <header class="logo search login"></header>
+    <nav class="navigation">导航</nav>
+    <main class="main">
+        <article class="article">
+            <figure>
+                <picture>
+                    <img src="图片地址.jpg" alt="备选文本" title="图片标题">
+                </picture>
+                <figcaption>
+                    <section>
+                        <h3>产品标题</h3>
+                        <p>产品介绍<em lang="en">外文名</em><strong>功能</strong></p>
+                        <time datetime="2022-07-03">2022年07月03日</time>
+                    </section>
+                </figcaption>
+            </figure>
+        </article>
+        <!-- <section>
+            <article>
+                <figure>
+                    <picture>
+                        <img src="" alt="">
+                    </picture>
+                </figure>
+                <figcaption>
+                    <h2>标题</h2>
+                    <p>内容</p>
+                </figcaption>
+            </article>
+        </section> -->
+        <aside class="aside">
+            <ul>
+                <li></li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <dl>
+            <dt></dt>
+            <dd></dd>
+            <dd></dd>
+        </dl>
+        <address></address>
+    </footer>
+    <!-- 自理解排版结束 -->
+
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- 无语义元素:辅助现有语义无法准确应对的情况 -->
+    <div></div>
+    <!-- <div>块级(block)无语义元素,和主内容无关,例如:一直显示的购物车,产品对比栏等,尽量少用<div>会导致代码混乱,不利于维护 -->
+    <span lang="zh-CN"></span>
+    <!-- <span>内联(inline)无语义元素,用于不想增加特定含义时使用 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <br/>
+    <!-- <br/>换行 -->
+    <hr/>
+    <!-- <hr/>水平分割线 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <a href="地址" title="标题,鼠标悬停显示信息" target="打开链接方式">超链接文本</a>
+    <a href="地址" title="标题" target="打开方式">
+        <img src="文件地址" alt="图片无法显示时显示的文本">
+        <!-- 将块文件插入超链接中,<a>链接就变成了块链接 -->
+    </a>
+    <a href="文件路径#元素ID">页面位置锚链接</a>
+    <!-- 通过href属性可也跳转到指定页面的指定位置,用#id指定,跳转位置为当前页面,可以省略文件路径 -->
+    <!-- 超链接文本表达要准确,简洁,不要使用类似,点击这里下载(描述不准确),直接将URL地址作为超链接文本(难以理解,不够简洁)或特别长的文本作为连接文本(影响阅读) -->
+    <!-- 连接本网站使用相对连接,连接外部网站使用绝对连接(绝对连接需要使用DNS服务器处理返回,降低效率) -->
+    <a href="javascript:void(0)">点击链接不会发生任何事</a>
+    <a href="文件路径" download="文件名">下载文件(EXE,10MB)</a>
+    <!-- 连接到非HTML资源,推荐留下清晰的指示,下载链接使用download属性 -->
+    <a href="mailto:邮件地址">向xx发送邮件</a>
+    <!-- 使用 mailto:link  简单说明收件人邮件地址 只使用mailto:关键字,不添加link链接,也会被用户邮件客户端打开,只是没有收件人地址,通常在"分享"链接中使用 -->
+    <a href="mailto:邮件地址?cc(抄送)=xxx&bcc=xxx&subject(主题)=xxx&body(主体)=xxxx">向cc,bcc 发送标题为subject内容为body的邮件</a>
+    <!-- URL中的字段必须使用URL编码的,不能有非打印字符(不可见字符)和空格,?问号用于分隔主URL和参数,&用于分隔各个参数 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <p>段落元素标签,每个&lt;p&gt;标签默认占一整行</p>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <h1>主标题:the main heading->故事名字</h1>
+    <h2>二级子标题:subheadings->章节标题</h2>
+    <h3>三级子标题:sub-subheadings->章节下子标题</h3>
+    <!-- 标题要连贯按照<h1><h2>顺序使用,便于搜索引擎分析,<h1>标题最好每个页面只出现一次,<h>标签最好每页使用不超过三种,较多的层次不利于搜索引擎 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <em>斜体,强调</em>
+    <!-- <em>emphasis 标记强调 <em>标签可以被屏幕阅读器识别,并输出不同音调  默认为斜体字体风格-->
+    <strong>加粗,非常重要</strong>
+    <!-- <strong>strong importance 标记非常重要 <strong>标签可以被屏幕阅读器识别,并输出不同音调 默认为加粗字体风格-->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <i lang="fr">斜体</i>
+    <!-- 如果只是想获得斜体风格,可以使用 <i>标签 传统斜体表达的意义:外国文字,分类名称,技术术语,一种思想... -->
+    <b>加粗</b>
+    <!-- 如果单纯想获得加粗字体等个,可以使用 <b>标签  传统粗体表达的意义:关键字,产品名称,引导句,动词...-->
+    <u style="text-decoration-line: underline; text-decoration-style:wavy;">下划线</u>
+    <!-- 为文字添加下划线风格  传统下划线表达的意义:专有名称,拼写错误,因为超链接默认也是下划线风格,所以使用<u>元素时,可以使用css改变元素默认样式-->
+    <s>删除线</s>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <ul>
+        <!-- <ul>无序列表</ul> -->
+        <li>
+            <!-- <li>列表元素</li> -->
+        </li>
+
+    </ul>
+
+    <ol type="I" start="4">
+        <!-- <ol>有序列表</ol> -->
+        <li value="9">
+            <!-- <li>列表元素</li> -->
+        </li>
+    </ol>
+    <!-- <ol> 有序列表 type属性参数(废弃): a小写字母 A大写字母 i小写罗马数字 I大写罗马数字 1数字   CSS:list-style-type 
+                        start属性: 有序列表起始的标记号
+                        reversed属性: 有序列表使用倒序排列
+                        value属性: 指定有序列表标记号 -->
+    <ol>
+        <!-- 嵌套列表也是可以的 -->
+        <li></li>
+        <li>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    </ol>
+
+    <dl>
+        <!-- <dl>description list  描述列表 -->
+        <dt><!-- description term  描述术语 --></dt>
+        <dd>
+            <!-- description definition  描述内容,<dd>会在<dt>内容的基础上,进行缩进,一个<dt>可以拥有多个<dd>-->
+        </dd>
+        <dd>
+
+        </dd>
+    </dl>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <menu>呈现一组用户可执行或激活的命令</menu>
+    <!-- <menu>(实验功能)既可以存在于屏幕顶端的列表菜单,也可以存在于吟唱按钮之下,效果类似于<ul>,区别在于<ul>主要展示选项,<menu>是为了交互 HTML4中取消 HTML5中重启 -->
+    <!-- 由于支持性不佳,不推荐使用 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- 块引用,浏览器在渲染块引用时,默认会增加缩进 -->
+    <blockquote cite="引用资源的URL地址">
+        <!-- 内容 -->
+    </blockquote>
+    <!-- 行内引用,浏览器默认将<q>引用中的内容用双引号包裹  "引用内容" 长引用使用<blockquote>标签 -->
+    <q></q>
+    <!-- 引文cite属性内容浏览器默认不显示,屏幕阅读器阅读需要使用JS或CSS,浏览器才会显示cite中的内容,为了确保引用来源的显示,最好的方法是为<cite>元素附上链接 -->
+    <figure>
+        <blockquote>
+            <p>引用内容</p>
+        </blockquote>
+        <figcaption>描述
+            <cite><a href="引用地址">引用地址描述</a></cite>by 引用结束内容
+        </figcaption>
+    </figure>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <abbr title="缩略文本的标准名称">缩略文本</abbr>
+    <!-- <abbr>标签通常用于包裹缩略语或简写,并且提供缩写的解释 title属性 ,鼠标经过缩略标签,会显示title中内容 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <sup>上标</sup>
+    <sub>下标</sub>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <code>用于标记计算机通用代码</code>
+    <pre>保留空白字符(通常用于代码块),保持代码的缩进方式和空格,按编辑器中的样式渲染代码</pre>
+    <var>用于标记变量名(文字以当前字体的斜体显示)</var>
+    <!-- 变量名以斜体显示 -->
+    <kbd>用于记录输入电脑的键盘(或其他类型)输入</kbd>
+    <samp>用于标记计算机程序的输出</samp>
+    <dfn>表示术语</dfn>
+    <small>字体变小一号</small>
+    <mark>用于标记或突出显示文本,区别于&lt;strong&gt;(强调本文在上下文中的重要性), mark是强调本文在上下文中的关联性</mark>
+    <!-- <mark>包裹的文本会高亮显示 -->
+    <data value="398">将元素和机器可读的翻译链接在一起</data>
+    <!-- 将<data>中的value属性值和文本内容关联,使机器更好识别内容    <data value="121">中号番茄酱</data> -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <time datetime="2016-01-20">2016年 1 月 20 日</time>
+    <!-- <time>标签可以通过设置datetime属性,将不同格式的日期统一成相同格式,方便计算机识别,datetime中计算机可识别格式是多种多样的 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!-- 媒体 -->
+    <img src="文件地址" alt="备选文本,文件失效后显示的文字" title="鼠标经过时显示的文字(title属性会导致无障碍阅读重复阅读,图片小标题更推荐使用 figure或figcaption元素)">
+    <!-- 将图片存储在静态HTML页面的images文件夹中,使用相对路径更利于SEO,图片的文件名使用有含义的描述性文字比无意义或广义文件名要好(flower.jpg由于img335.jpg) -->
+    <!-- 确保使用有版权或有充足证明是公共领域的图片,不要盗链(hotlinking),盗链会降低页面加载速度,图片被移除,更改会影响你自己的页面 -->
+    <!-- <img>和<video>这样的元素又是被称为"替换元素" 因为这样的元素的内容尺寸由外部资源所定义,而不是元素自身 -->
+    <!-- alt属性:有利于屏幕阅读器识别,纯文本浏览器也可以通过alt属性获取图片的描述,搜索引擎可能会将图片文字描述和查询条件匹配,用户有时也会主动关闭图片显示 -->
+    <!-- 装饰图片一般使用CSS,如果主要文本已经对图片有详细描述 alt="" 即可,图片超链接,alt写在<a>标签或<img>标签中的alt都可以 -->
+    <img srcset="图片320w.jpg 320w,图片480w.jpg 480w, 图片800w.jpg 800w" sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px" src="图片地址" alt="备选文本">
+    <!-- srcset定义了可选图像集,逗号分隔 每组属性顺序为 文件名 + 空格 + 图像固有宽度      sizes定义了媒体条件(例如屏幕宽度)  媒体条件 + 空格 + 条件为真时,图像将填充的宽度 -->
+    <picture>
+        <source media="(max-width: 799px)" srcset="小图.jpg">
+        <source media="(min-width: 800px)" srcset="大图.jpg">
+        <source srcset="图片.svg" type="image/svg+xml">
+        <source srcset="图片.webp" type="image/webp">
+        <source srcset="图片.jpg" type="image/jpg">
+        <img src="大图" alt="备选文本">
+    </picture>
+    <picture>
+        <source srcset="small-image.jpg 400w , medium-image.jpg 800w , large-image.jpg 1200w" sizes="(min-width:1280px) 1200px , (min-width: 768px) 400px , 100vw">
+    </picture>
+    <!-- picture标签包含多个source元素 和 一个!!! img元素 img元素在没有匹配的时候实现 -->
+    <!-- picture标签source元素可用属性有 media(类似媒体查询,如果没有匹配到media中的条件,则当前source会被跳过)  type属性(指定资源的MIME类型,用户代理不支持指定类型,则source会被跳过) -->
+    <!-- srcset(密度描述) = "图片url , 图片url 2x(图片密度,倍图默认1x)" -->
+    <!-- srcset(宽度描述) = "small-image.jpg 160w(图片宽度) , medium-image.jpg 320w , large-image.jpg 1280w" 宽度描述会根据分辨率选择图片,小视窗(手机)下,图片会根据窗口宽度选择图片,单在桌面端,需要配合sizes来配合宽度描述 -->
+    <!-- sizes(图片尺寸) = "(max-width(小于等于): 480px) 100vw , (max-width: 900px) 32vw , 256px" 使用srcset宽度描述时都需要sizes属性的配合 sizes只有在宽度描述时才有意义,密度描述不需要,sizes属性告诉浏览器多大尺寸图片与多大尺寸视图相关-->
+    <!-- <picture>标签可以让浏览器根据不同参数选择显示不同图片,在小尺寸浏览器中,图片可以放大主要部分显示而不是整体缩放,用法和<video>类似 -->
+    <!-- 使用<picture>自适应加载图片的好处是,在生成HTML页面时就加载了合适的图片,而不是后期通过CSS或JavaScript计算后重新加载以缓存的默认图片,可以减少20%的页面加载时间 -->
+    <!-- 使用<picture>标签也可以自适应更多格式的图片,也能保证旧版本浏览器正常显示 -->
+    <figure>
+        <img src="文件地址" alt="备选文本">
+        <figcaption>图片描述</figcaption>
+    </figure>
+    <!-- 使用<figure>元素包裹<img>和<figcaption>能增强图片和描述间的关系,优于<img>+<p>,更好的展现内容的关联性,<figure>中可以是多张图片,一段代码,音频,视频,方程,表格等其他需要关联的内容 -->
+    <!-- 也更推荐使用<figcaption>元素来描述关联内容,而不是使用title属性来描述内容 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <video src="文件地址" controls="conytols">后备内容</video>
+    <!-- src同<img>的src使用方式  controls属性将为视频开启浏览器提供的控件界面,同时也可以使用JavaScript API创建自己的界面,界面中至少包含开始,停止,调整音量功能 -->
+    <!-- <video>标签中的内容称为后备内容,如果浏览器不支持<video>标签将把后备内容提供给用户 -->
+    <video controls="controls" width="400" height="400" autoplay="autoplay" loop="loop" muted="muted" poster="图片">
+        <source src="文件地址.mp4" type="video/mp4">
+        <source src="文件地址.webm" type="video/webm">
+        <p>你的浏览器不支持HTML5视频,可点击<a href="文件地址.mp4">此链接</a>观看</p>
+    </video>
+    <!-- 去除<video>中的src属性,选择使用<source>标签,浏览器会根据自己支持的类型选择 type属性告知视频类型,用于浏览器选取自己支持类型 -->
+    <!-- autoplay:自动播放,不建议使用,谷歌浏览器默认带有声音的视频音频无法自动播放,静音可解决 -->
+    <!-- loop:循环播放,除非有必要,不建议使用     muted:静音     poster:视频未播放前显示,通常用于粗略的预览或广告-->
+    <!-- preload:设置视频缓存模式   none:不缓冲   auto:页面加载后缓存媒体文件      metadata:仅缓冲文件的元数据 -->
+    <audio src="文件地址"></audio>
+    <!-- <audio>与<video>使用方法几乎相同  因为没有视觉部件,所以不支持 width,height属性和poster属性 -->
+    <!-- 重新播放媒体可以在JavaScript中调用 "load()" 方法来重置媒体 mediaElement.load() -->
+    <!-- JavaScript中audioTracks.onaddtrack事件,可以 对视频增删音轨做出指定的反应-->
+    <video controls="controls">
+        <source src="视频文件.mp4" type="video/mp4">
+        <source src="视频文件.webm" type="video/webm">
+        <track kind="subtitles" src="字幕文件地址.vtt" srclang="en 字幕文件语言" label="列出可选字幕1"></track>
+        <track kind="subtitles" src="字幕文件地址.vtt" srclang="ja 字幕文件语言" label="列出可选字幕2"></track>
+    </video>
+    <!-- <track> kind属性: subtitles:字幕  captions:隐藏字幕,音效,适用于无障碍静音  descriptions:视频内容文本描述,适用于无障碍  chapters:章节标题  metadata:脚本track,用户不可见-->
+    <!-- WebVTT格式,让用户可以使用<track>标签使用字幕文件 <track>文件放在<audio>或<video>标签中,需要放在所有<source>标签之后,kind:致命类型,srclang告诉浏览器字幕文件编写语言  -->
+    <!-- WebVTT文件格式:
+        WEBVTT
+        1
+        00:00:22.230 - -> 00:00:24.606   注因为剪头与HTML注释冲突,中间加入了空格,实际WebVTT文件箭头无空格,字幕文件以.vtt后缀保存
+        第一段字幕
+
+        2
+        00:00:30.739 - -> 00:00:34.074
+        第二段字幕
+
+        ...
+    -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <iframe src="框架内容地址" frameborder="0" width="" height="">备选内容(同&lt;video&gt;)</iframe>
+    <!-- <iframe>嵌入内容  frameborder(1显示边框,0不显示边框)   sandbox属性可以增加安全性,但是不要使用 allow-script和allow-same-origin,
+        同时使用嵌入代码就可以通过JavaScript删除sandbox,sandbox有没有存在的意义-->
+    <!-- 为了提高效率,推荐在页面全部加载完后,使用JavaScript设置<iframe>的src属性,可以减少页面加载时间,优化SEO -->
+    <!-- HTTPS 可以减少数据传输过程中被篡改  还可以防止嵌入式内容访问父文档中的内容,反之亦然 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <svg></svg>
+    <!-- svg是HTML支持的矢量图格式 ,既可以通过<img>标签使用 也可以以代码形式放在<svg></svg>标签中由浏览器生成 -->
+    <!-- 使用<svg>标签生成的矢量图,称为内联SVG,好处是可以通过CSS更改外观属性,使用CSS动画  ,缺点:多次使用导致资源密集型维护,增加HTML页面大小,不能缓存图片等 -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <table>
+        <caption>表格描述,标题</caption>
+        <colgroup>
+            <col>
+            <col style="background-color: green;" span="2">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <!-- scope指定单元格是哪个方向的表头,col列表头,row行表头,colgroup列组表头,rowgroup行组表头 -->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <!-- <table>表格 , <tr>行 , <th>标题 , <td>列 -->
+    <!-- colspan 宽度  rowspan 高度 -->
+    <!-- <colgroup>可以设置列样式,通过<col>控制对应列的样式,就可以不用为表格元素一一指定样式了  通过span属性可以指定样式应用几列 3代表应用三列,下一个<col>影响第四列-->
+    <!-- <thead>,<tbody>,<tfoot>标签可以为表格提供语义化含义,有<caption>和<colgroup>标签需要放在这两个标签之后 -->
+    <!-- 表格可以嵌套表格,但是不推荐使用,会影响屏幕阅读器,结构也会复杂难以维护 -->
+    <!-- 通过scope属性可以让屏幕阅读设备一次读取一行或一列,便于视觉障碍用户理解表格信息 多列或多行使用scope可选属性 colgroup或rowgroup -->
+    <!-- 使用ID也可以替代scope属性, <th id="标题"></th>   对应的列  <td headers="标题"></td> -->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <form action="" method="post" autocomplete="off">
+        <fieldset>
+            <!-- fieldset 用于对表单中的控制元素进行分组 -->
+            <legend>
+                <!-- legend 用于表示其父元素fieldset的内容标题,默认样式为 黑色边框包含fieldset中内容,legend以黑底白字在最上方 -->
+            </legend>
+        </fieldset>
+        <div>
+            <label for="username">用户名</label>
+            <input type="text" id="username" placeholder="提示语">
+            <input type="submit" value="">
+        </div>
+    </form>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <script src="javascript文件地址" defer>
+        // script文件放在body中即可,没有必要放在<head>标签中
+        // defer表示在HTML加载完成后,再加载javascript,defer加载完成后才会执行DOMContentLoaded,defer属性的脚本按照代码顺序依次执行
+        // async表示在遇到<scrip>元素时不要中断后续的HTML加载,async只适用于外部脚本,当页面遇到JS代码时会直接下载,但是不能控制脚本运行次序,适用于脚本彼此独立时使用
+    </script>
+    <!-- canvas API 用于图形绘制 canvas 的 WebGL API 则用于绘制硬件加速的2D 和 3D 图形-->
+    <canvas id="canvas" width="300" height="300">
+        <!-- 不支持canvas时的替代内容 -->
+    </canvas>
+    <!-- JS 使用 document.getElementById()方法获取canvas元素的引用,HTMLCanvasElement.getContext()来获取元素内容--图像稍后在此渲染 -->
+    <!-- CanvasRenderingContext2D 接口是canvas APi 的一部分 用于提供2D渲染上下文,它用于绘制形状,文本,图像和其他对象 -->
+    <!-- canvas默认尺寸 300*150 canvas只有2个属性 width和height src和alt属性是没有的-->
+    <script>
+        //canvas 使用绝对坐标,使用css的width和height ,canvas会像图片一样被拉抻
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d"); //getContext(contextType , contextAttributes) getContext(contextType , {alpha:true,depth:false})返回canvas内容的上下文,没有则返回null
+        /*
+        canvas上下文类型(contextType):
+            "2d" 建立一个 CanvasRenderingContext2D 二维渲染上下文
+            "webgl" (或"experimental-webgl") 建立一个 WebGLRenderingContext 三维渲染上下文,只在实现WebGL版本1的浏览器上可用
+            "webgl2" (或"experimental-webgl2") 建立一个 WebGL2RenderingContext 三维渲染上下文,只在实现WebGL版本2的浏览器上可用(实验)
+            "bitmaprenderer" 将创建一个只提供将canvas内容替换为指定 ImageBitmap(位图图像) 功能的 ImageBitmapRenderingContext.
+        canvas上下文属性(contextAttributes):
+            2d上下文属性
+            "alpha" boolean布尔值,表名canvas包含一个alpha通道,false浏览器将认为canvas背景总是不透明的,这样可以加速绘制透明的内容和图片
+            (Gecko浏览器内核)"willReadFrequently" boolean布尔值表示是否有重复读取计划(费标准)
+            (blink浏览器内核)"storage" string字符 表示使用哪种方式存储(默认为 持久"persistent")
+            WebGL上下文属性
+            "alpha" boolean布尔值 表示canvas包含一个alpha缓冲区
+            "antialias" boolean布尔值 表示是否开启抗锯齿
+            "depth" boolean布尔值表明绘制缓冲区包含一个深度至少为16位的缓冲区
+            "failIfMajorPerformanceCaveat" 表名在一个系统性能低的环境是否创建该上下文的boolean值
+            "powerPreference" 指示浏览器在运行WebGL上下文时使用相应的GPU电源配置 "default"自动选择 默认 "high-performance"高性能 "low-power"节能\
+            "premultipliedAlpha" 表明排版引擎将假设绘制缓冲区包含预混合alpha通道的 boolean 值
+            "preserveDrawingBuffer" 如果这个值为true缓冲区将不会被清除,会保存下来,直到被清除会被使用者覆盖
+            "stencil" 表明绘制缓冲区包含一个深度至少为8位的模板缓冲区boolean值
+        */
+
+        //canvas绘制矩形 (x,y指定绘制元素相对于canvas画布左上角的位置,width和height设定矩形的宽高)
+        ctx.fillRect(x, y, width, height); //绘制一个填充的矩形
+        ctx.strokeRect(x, y, width, height); //绘制一个矩形边框
+        ctx.clearRect(x, y, width, height); //清除指定区域,让清除部分完全透明
+        ctx.rect(x, y, width, height); //在该方法执行时,moveTo()将归位到(0,0)坐标
+
+        /*
+        canvas绘制路径
+        1.创建路径起始点 beginPath()
+        2.使用画图命令画出路径  stroke()
+        3.封闭路径 closePath()
+        4.生成路径后,通过描边或填充渲染路径 fill()
+        */
+        ctx.beginPath();
+        ctx.moveTo(75, 50); //无论绘制什么图像,默认第一步都是通过moveTo(x,y)指定图像的起点
+        //moveTo(x,y)移动笔触,将笔触移动到指定位置上
+        ctx.lineTo(100, 75); //使用lineTo(x,y)连线到下一个点
+        ctx.lineTo(100, 25);
+        ctx.fill(); //调用fill()时,没有闭合的图形会自动闭合,可以省略 closePath() ,但是调用stroke()时不会闭合
+        ctx.stroke(); //渲染线
+
+        //canvas绘制线
+        ctx.lineTo(x, y); //绘制一条从当前位置到指定x以及y位置的直线
+
+        //绘制圆弧
+        ctx.arc();
+        //ctx.arc(x(圆心x轴位置),y(圆心y轴位置),radius(半径),startAngle(圆弧起点弧度),endAngle(圆弧终点弧度),anticlockwise(生成方向,默认false顺时针,true逆时针))
+        //arc()中使用弧度而不是角度 角度制将圆的周角分成360份,每份占1/360称为1度 与圆的大小无关,圆周长为 C=2πr 即 周长 = π * 直径(d)(2*r(半径)) 所以 360度 = 2π 180度 = π 1弧度 = π/180
+        //弧度制就是使用弧的长度来度量角的大小的方法,单位弧度定义为圆周上长度等于半径的圆弧与圆心构成的角,圆弧长短与圆半径之比不会因圆的大小而改变, 定义 以长为圆周长(2πr)的弧所对的圆心角为2π的弧度,
+        //圆面积 S=πr^2  圆周长 C=2πr 角度 = 360 弧度 = 2π/360 Math.PI = 3.1415926...    JS中的弧度为 弧度=(Math.PI/180)*角度
+        ctx.arcTo(x1, y1, x2, y2, radius); //根据给定的控制点和半径画一段圆弧,再以直线连接两个控制点
+
+        //绘制贝塞尔曲线
+        ctx.quadraticCurveTo(cp1x, cp1y, x, y); //绘制二次贝塞尔曲线,cp1x,cp1y为控制点,x,y为结束点
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y); //绘制三次贝塞尔曲线,cp1x,cp1y为控制点1 ,cp2x,cp2y为控制点2 x,y为结束点
+
+
+        //Path2D对象,用于缓存或记录会话命令
+        new Path2D(); //创建一个空的Path对象
+        new Path2D(path); //克隆Path对象
+        new Path2D(svg); //从SVG建立Path对象
+
+
+        //使用颜色和样式
+        ctx.fillStyle = "red" | "#ff5454" | "rgb(255,0,0)" | "rgba(255,0,0,0.5)"; //设置填充颜色
+        ctx.strokeStyle = color; //设置轮廓颜色同fillStyle
+        //设置透明度 transparency
+        ctx.globalAlpha = value(0.0 - 1.0); //设置canvas中所有图形的透明度 
+        //线型 Line Styles
+        ctx.lineWidth = value; //线宽 默认1.0
+        ctx.lineCap = type("butt 方形", "round 圆形", "square 出头,出头值为厚度的一半"); //线条末端样式
+        ctx.lineJoin = type("round 外圆角)", "bevel 外切角]", "miter 默认,锐角>"); //线链接处处理方式
+        ctx.miterLimit = value; //限制两条线交接处最大长度
+        ctx.getLineDash(); //返回一个包含当前虚线样式,长度为非负偶数的数组
+        ctx.setLineDash([5, 15, 25, 30]); //设置当前虚线样式 [线条长度,间隔,线条长度,间隔]
+        ctx.lineDashOffset = value; //设置虚线起始偏移量
+
+        //使用渐变 Gradients
+        //线形渐变 createLinearGradient(x1,y1,x2,y2);
+        //径向渐变 createRadialGradient(x1,y1,r1,x2,y2,r2);
+        var lineargradient = ctx.createLinearGradient(0, 0, 150, 150); //创建canvasGradient 对象
+        var radialgrandient = ctx.createRadialGradient(75, 75, 0, 75, 75, 100);
+        //创建出canvasGradient对象后,使用addColorStop()上色
+        //gradient.addColorStop(position,color); position必须是0.0-1.0之间的数值,表示渐变色所在相对位置,color参数必须是有效的css值,如:#ffffff rgb(r,g,b) "red"等
+        lineargradient.addColorStop(0, "white");
+        lineargradient.addColorStop(1, "#000000");
+        //设定了0位置白色 1位置黑色的渐变
+        //通过fillStyle或strokeStyle 使用渐变
+        ctx.fillStyle = lineargradient;
+        ctx.strokeStyle = lineargradient;
+
+        //图案样式 Patterns
+        //createPattern(image , type); image是一个image对象的引用或另一个canvas对象,Type必须是以下字面量"repeat","repeat-x","repeat-y"和"no-repeat"
+        var img = new Image();
+        img.src = "image.png";
+        var ptrn = ctx.createPattern(img, "repeat");
+        //注意, 需要通过onload 确保图像已装载完毕
+        //示例
+        var ctx = document.getElementById("canvas").getContext("2d"); //获取canvas上下文内容
+        var img = new Image(); //新建Image实例
+        img.src = "canvas_img.jpg"; //指定图片地址
+        img.onload = () => { //图片加载完毕后,创建图案,指定填充,生成填充指定图案的图形
+            var ptrn = ctx.createPattern(img, "repeat");
+            ctx.fillStyle = ptrn;
+            ctx.fillRect(0, 0, 150, 150);
+        };
+
+        //阴影 Shadows
+        ctx.shadowOffsetX = float; //指定阴影偏移X轴值
+        ctx.shadowOffsetX = float; //指定阴影偏移Y轴值
+        ctx.shadowBlur = float; //指定模糊值,默认0
+        ctx.shadowColor = color; //指定阴影颜色
+
+        //Canvas填充规则
+        //当使用 fill 或 clip 或 isPointinPath 时,可以选择一个填充规则,该填充规则根据某处在路径的外面或里面来决定是否被填充,对于自己和自己路径相交或嵌套时是有用的
+        //嵌套规则 nonzero   或   evenodd
+
+        //绘制文本
+        ctx.font = "48px serif"; //设置要渲染的字号和字体
+        //ctx.fillText(text , x , y [, maxWidth(最大绘制宽度)]);
+        ctx.fillText("Hello World", 10, 50); //实体文字
+        //ctx.strokeText(text , x , y ,[, maxWidth]);
+        ctx.strokeText("Hello Canvas", 10, 80); //边框文字(空心)
+
+        //设置文本样式
+        ctx.font = value; //设置文本样式 同CSS font属性相同语法 默认字体为 10px sans-serif
+        ctx.textAlign = value; //设置文字对齐 可选值: start , end , left , right , center , 默认值 start
+        ctx.textBaseline = value; //设置文字基线 可选值: top , hanging , middle , alphabetic , ideographic , bottom 默认值为 alphabetic
+        ctx.direction = value; //设置文本方向 可选值 ltr , rtl , inherit 默认值为 inherit
+
+        //测量文本宽度
+        var text = ctx.measureText("text");
+        console.log(text.width);
+
+        //canvas使用图像 
+        //canvas可以使用 Image()图像 <img>元素 <video>元素(抓取视频当前帧) <vanvas>元素 ImageBitmap
+        //document.images可以回去当前文档已加载的图片集合
+        //使用远程图片,如果图片的服务器云溪跨域访问这个图片,那么可以使用,否则会污染canvas
+
+        //canvas绘制图片
+        ctx.drawImage(img, x, y); //img为图片文件,x,y为图片左上角所在位置
+
+        //缩放 Scaling
+        ctx.drawImage(image, x, y, width, height); //width和height 用来控制当向canvas画入时应该缩放到的大小
+
+        //切片 Slicing
+        ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight); //image是图片引用 前4个参数是在源图片上切片的位置和大小,后4个是自定义切片完成后的目标显示位置和大小
+
+        //禁用平滑缩放 过度缩放图像会导致图像模糊或像素化
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+        //保存画布 save() 保存画布(canvas)的所有状态
+        ctx.save(); //保存画布默认状态,稍后可调用默认状态再次绘制 
+        //恢复最近 restore() 如果没有保存,不做任何改变
+        ctx.restore();
+        //save()将当前状态放入栈中,restore()读取栈中save()存入的状态 (后进先出);
+
+        //移动 Translating
+        ctx.translate(x, y);
+
+        //旋转 Rotating 旋转是以对象的原点进行旋转的,模型左上角 (0,0)
+        //旋转的中心点始终是canvas的原点,如果要改变她,需要使用translate方法  ,旋转的角度是顺时针方向,值以弧度为单位表示
+        //示例 中心旋转
+        ctx.fillStyle = "blue"; //指定第一个图形颜色
+        ctx.fillRect(150, 30, 100, 100); //绘制第一个矩形
+        ctx.translate(200, 80); //x=x+0.5*width , y=y+0.5*height  将原点移动到要旋转的中心点
+        ctx.rotate((Math.PI / 180) * 25); //旋转25度
+        ctx.translate(-200, -80); //绘制点归位
+        ctx.fillStyle = "grey"; //指定第二个图形颜色
+        ctx.fillStyle(150, 30, 100, 100); //绘制第二个矩形,第二个矩形以第一个矩形中心点顺时针旋转25度
+
+        //缩放 Scaling
+        ctx.scale(x, y); //x,y值 大于1为放大,大于0小于1为缩小,负数为镜像
+
+        //变形 Transforms
+        ctx.transform(a, b, b, d, e, f);
+        /*
+        这个防防将当前的变形矩阵乘上一个基于自身参数的矩阵
+        a c e
+        b d f
+        0 0 1
+        a(m11) 表示水平方向缩放
+        b(m12) 表示垂直方向的倾斜偏移
+        c(m21) 表示水平方向的倾斜偏移
+        d(m22) 表示垂直方向的缩放
+        e(dx)  表示水平方向的移动
+        f(dy)  表示垂直方向的移动
+        */
+
+        //globalCompositeOperation
+        ctx.globalCompositeOperation = type; //设定绘制新图形时采用的遮盖策略
+        /*
+        globalCompositeOperation策略
+        ousrce-over 覆盖现有内容
+        source-in 只绘制现有内容范围
+        source-out 只绘制现有内容外空白区域
+        source-atop 只绘制与现有内容相交部分
+        destination-over 将内容绘制在现有内容底层
+        destination-in 将新绘制图形视为现有内容的遮罩
+        destination-out 将现有内容扣除新绘制内容(反向遮罩)
+        destination-atop 遮罩,但同时将新绘制图形绘制与当前图形底层
+        lighter 颜色叠加
+        copy 只显示新图形
+        xor 重叠部分透明
+        multiply 颜色叠加
+        screen 变亮
+        overlay multiply+screen 按的部分更暗,亮的部分更亮
+        darken 保留两个图层中最暗的像素
+        lighten 保留两个图层中最亮的像素
+        以下省略,查阅手册
+        */
+
+        //剪切路径 (路径遮罩) clip()
+        ctx.clip(); //将正在构建的路径转换为当前图形的剪切路径
+
+        /*
+        canvas动画基本步骤
+        1.清空canvas
+        2.保存canvas状态
+        3.绘制图形
+        4.恢复canvas状态
+        */
+        /*
+        更新画布的方法(定时器)
+        setInterval(function , delay);  定期执行
+        setTimeout(dunction , delay);   延时执行
+        requestAnimationFrame(callback); 告诉浏览器希望执行一个动画,并在重绘之前,请求浏览器执行特定函数来更新动画
+        */
+    </script>
+</body>
+
+</html>
